@@ -64,7 +64,7 @@ flags.DEFINE_integer(
 
 flags.DEFINE_boolean(
     'train_vggish', True,
-    'If Frue, allow VGGish parameters to change during training, thus '
+    'If True, allow VGGish parameters to change during training, thus '
     'fine-tuning VGGish. If False, VGGish parameters are fixed, thus using '
     'VGGish as a fixed feature extractor.')
 
@@ -114,8 +114,8 @@ def _get_examples_batch():
   noise_labels = np.array([[0, 0, 1]] * noise_examples.shape[0])
 
   # Shuffle (example, label) pairs across all classes.
-  all_examples = sine_examples + const_examples + noise_examples
-  all_labels = sine_labels + const_labels + noise_labels
+  all_examples = np.concatenate((sine_examples, const_examples, noise_examples))
+  all_labels = np.concatenate((sine_labels, const_labels, noise_labels))
   labeled_examples = list(zip(all_examples, all_labels))
   shuffle(labeled_examples)
 

@@ -36,7 +36,7 @@ parser.add_argument(
     help='Directory to download data and extract the tarball')
 
 
-def main(unused_argv):
+def main(_):
   """Download and extract the tarball from Alex's website."""
   if not os.path.exists(FLAGS.data_dir):
     os.makedirs(FLAGS.data_dir)
@@ -59,5 +59,5 @@ def main(unused_argv):
 
 
 if __name__ == '__main__':
-  FLAGS = parser.parse_args()
-  tf.app.run()
+  FLAGS, unparsed = parser.parse_known_args()
+  tf.app.run(argv=[sys.argv[0]] + unparsed)
